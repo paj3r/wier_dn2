@@ -30,13 +30,13 @@ if method == "A":
             "0": bol,
             "1": bol2
         },
-        "overstock.com":{
+        "overstock.com": {
             "0": ove,
             "1": ove2
         },
-        "rtvslo.si":{
+        "rtvslo.si": {
             "0": rtv,
             "1": rtv2
         }
     }
-    #print(ou)
+    print(ou)

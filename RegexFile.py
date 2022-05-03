@@ -83,13 +83,35 @@ def regexbolha(html):
     return output
 
 def regexoverstock(html):
-    print(html)
-    img_hrefs = re.findall('''
-        (?<=<tr bgcolor="#ffffff"> 
-<td valign="top" align="center"> 
-<table><tbody><tr><td><a href=")[\s\S]*?(=?")
-    ''',html)
-    print(img_hrefs)
+    hrefs = re.findall("(?<=<td valign=\"top\" align=\"center\"> \n<table><tbody><tr><td><a href=\")[\s\S]*?(?=\")",html)
+    #print(img_hrefs)
+    titles = []
+    for url in hrefs:
+        url_t = str(url).replace("?", "\?")
+        titles.append(re.search("(?<="+url_t+"\"><b>)[\s\S]*?(?=</b>)", html).group(0))
+    descriptions = re.findall('(?<=</tbody></table> \n</td><td valign="top"><span class="normal">)[\s\S]*?(?=<br>)', html)
+    listprices = re.findall('(?<=<b>List Price:</b></td><td align="left" nowrap="nowrap"><s>)[\s\S]*?(?=</s)', html)
+    #print(len(listprices))
+    prices = re.findall('(?<=</td></tr> \n<tr><td align="right" nowrap="nowrap"><b>Price:</b></td><td align="left" nowrap="nowrap"><span class="bigred"><b>)[\s\S]*?(?=</b)', html)
+    #print(len(prices))
+    temp = re.findall('(?<=<b>You Save:</b></td><td align="left" nowrap="nowrap"><span class="littleorange">)[\s\S]*?(?=</span>)', html)
+    saving = []
+    perc = []
+    for i in range(len(temp)):
+        t = temp[i].split(" ")
+        saving.append(t[0])
+        perc.append(t[1])
+    ads = {}
+    for i in range(len(perc)):
+        ads[i] = {
+           "Title":titles[i],
+           "Content":descriptions[i],
+           "ListPrice":listprices[i],
+           "Price":prices[i],
+           "Saving":saving[i],
+           "SavingPercent":perc[i]
+        }
+    return ads
 
 def regexrtv(html):
     return 1
