@@ -19,7 +19,17 @@ def regexbolha(html):
     print(subt1_href)
     subt1 = re.search("(?<=<a class=\"CategoryListing-topCategoryLink\" href=\""+subt1_href+"\">)[\s\S]*?(?=</a>)", html).group()
     print(subt1)
-
+    subt1_count = re.search("(?<=<span class=\"CategoryListing-entitiesCount\">)[\s\S]*?(?=</span>)",
+                      html).group()
+    print(subt1_count)
+    subt_hrefs = re.findall("(?<=<a class=\"CategoryListing-topCategoryLink\" href=\")[\s\S]*?(?=\">)", html)
+    subts = []
+    for url in subt_hrefs:
+        subts.append(re.search("(?<=<a class=\"CategoryListing-topCategoryLink\" href=\""+url+"\">)[\s\S]*?(?=</a>)", html).group())
+    print(subts)
+    subt_counts = re.findall("(?<=<span class=\"CategoryListing-entitiesCount\">)[\s\S]*?(?=</span>)",
+                      html)
+    print(subt_counts)
 
 method = sys.argv[1]
 #print(method)
