@@ -114,4 +114,28 @@ def regexoverstock(html):
     return ads
 
 def regexrtv(html):
-    return 1
+    author = re.search('(?<=<div class="author-name">)[\s\S]*?(?=</div>)', html).group()
+    #print(author)
+    published = re.search('(?<=<div class="publish-meta">\n)[\s\S]*?(?=<br>)', html).group().strip()
+    #print(published)
+    title = re.search('(?<=<h1>)[\s\S]*?(?=</h1>)', html).group().strip()
+    #print(title)
+    subtitle = re.search('(?<=<div class="subtitle">)[\s\S]*?(?=</div>)', html).group().strip()
+    #print(subtitle)
+    lead = re.search('(?<=<p class="lead">)[\s\S]*?(?=</p>)', html).group().strip()
+    #print(lead)
+    cont = re.findall('(?<=<p class="Body">)[\s\S]*?(?=</p>)',html)
+    cont_out = ""
+    for tex in cont:
+        cont_out+=tex
+    #print(cont_out)
+    output = {
+        "Author":author,
+        "PublishedTime":published,
+        "Title":title,
+        "SubTitle":subtitle,
+        "Lead":lead,
+        "Content":cont_out
+    }
+    return output
+
