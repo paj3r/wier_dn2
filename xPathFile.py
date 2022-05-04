@@ -100,4 +100,29 @@ def xpathoverstock(data):
     return ads
 
 def xpathrtv(data):
-    return 1
+    parser = etree.HTMLParser()
+    tree = etree.parse(data, parser)
+    author = tree.xpath('//div[@class="author-name"]/text()')[0]
+    #print(author)
+    published = tree.xpath('//div[@class="publish-meta"]/text()')[0].strip()
+    #print(published)
+    title = tree.xpath('//h1/text()')[0]
+    #print(title)
+    subtitle = tree.xpath('//div[@class="subtitle"]/text()')[0]
+    #print(subtitle)
+    lead = tree.xpath('//p[@class="lead"]/text()')[0]
+    #print(lead)
+    cont = tree.xpath('//article[@class="article"]/p/text()')
+    cont_out = ""
+    for tex in cont:
+        cont_out += tex
+    #print(cont_out)
+    output = {
+        "Author": author,
+        "PublishedTime": published,
+        "Title": title,
+        "SubTitle": subtitle,
+        "Lead": lead,
+        "Content": cont_out
+    }
+    return output
