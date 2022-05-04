@@ -4,6 +4,7 @@ import os
 import codecs
 import json
 import RegexFile as r
+import xPathFile as x
 
 
 
@@ -25,18 +26,25 @@ if method == "A":
     ove2 = r.regex("overstock", jewelry2.read())
     rtv = r.regex("rtv", audi.read())
     rtv2 = r.regex("rtv", volvo.read())
-    ou = {
-        "bolha.com": {
-            "0": bol,
-            "1": bol2
-        },
-        "overstock.com": {
-            "0": ove,
-            "1": ove2
-        },
-        "rtvslo.si": {
-            "0": rtv,
-            "1": rtv2
-        }
+elif method == "B":
+    bol = x.xpath("bolha", bolha.read())
+    bol2 = x.xpath("bolha", bolha2.read())
+    ove = x.xpath("overstock", jewelry1.read())
+    ove2 = x.xpath("overstock", jewelry2.read())
+    rtv = x.xpath("rtv", audi.read())
+    rtv2 = x.xpath("rtv", volvo.read())
+ou = {
+    "bolha.com": {
+        "0": bol,
+        "1": bol2
+    },
+    "overstock.com": {
+        "0": ove,
+        "1": ove2
+    },
+    "rtvslo.si": {
+        "0": rtv,
+        "1": rtv2
     }
-    print(ou)
+}
+print(ou)
