@@ -68,7 +68,36 @@ def xpathbolha(data):
     output = t_out
     return output
 
-def xpathoverstock(html):
-    return 1
-def xpathrtv(html):
+def xpathoverstock(data):
+    parser = etree.HTMLParser()
+    tree = etree.parse(data, parser)
+    titles = tree.xpath('(//tr[@bgcolor="#ffffff"]|//tr[@bgcolor="#dddddd"])/td[@valign="top"]/a/b/text()')
+    #print(titles)
+    descriptions = tree.xpath('(//tr[@bgcolor="#ffffff"]|//tr[@bgcolor="#dddddd"])/td[@valign="top"]/table//td[@valign="top"]//span[@class="normal"]/text()')
+    descriptions = [i.strip() for i in descriptions]
+    #print(len(descriptions)-len(titles))
+    listprices = tree.xpath('//td[@align="left" and @nowrap="nowrap"]/s/text()')
+    #print(len(descriptions)-len(listprices))
+    prices = tree.xpath('//td[@align="left" and @nowrap="nowrap"]/span[@class="bigred"]/b/text()')
+    #print(len(prices)-len(listprices))
+    temp = tree.xpath('//td[@align="left" and @nowrap="nowrap"]/span[@class="littleorange"]/text()')
+    saving = []
+    perc = []
+    for i in range(len(temp)):
+        t = temp[i].split(" ")
+        saving.append(t[0])
+        perc.append(t[1])
+    ads = {}
+    for i in range(len(perc)):
+        ads[i] = {
+            "Title": titles[i],
+            "Content": descriptions[i],
+            "ListPrice": listprices[i],
+            "Price": prices[i],
+            "Saving": saving[i],
+            "SavingPercent": perc[i]
+        }
+    return ads
+
+def xpathrtv(data):
     return 1
