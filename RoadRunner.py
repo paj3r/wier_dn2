@@ -16,8 +16,8 @@ def partial_alignment(tree1, tree2):
 
     # check parents
     if tree1.name == tree2.name:
-        tree1.contents = list(filter(lambda item: item != " " for item in tree1.contents))
-        tree2.contents = list(filter(lambda item: item != " " for item in tree2.contents))
+        tree1.contents = list(filter(lambda item: item != " ", tree1.contents))
+        tree2.contents = list(filter(lambda item: item != " ", tree2.contents))
 
         # check children
 
@@ -31,18 +31,18 @@ def partial_alignment(tree1, tree2):
             if x.name:
                 c2 += x.name
 
-        if len(tree1.children) == len(tree2.children) and c1 == c2:
+        if len(list(tree1.children)) == len(list(tree2.children)) and c1 == c2:
 
-            for i in range(0, len(list(tree1.children))):
+            for i, (tree1_sub, tree2_sub) in enumerate(zip(tree1.children, tree2.children)):
 
-                if tree1.children[i] == tree2.children[i]:
+                if tree1_sub == tree2_sub:
                     # children are the same, skip
                     continue
 
                 # otherwise, make new p. aligned tree
-                subtree = partial_alignment(tree1.children[i], tree2.children[i])
+                subtree = partial_alignment(tree1_sub, tree2_sub)
 
-                tree1.contents[i] = copy.copy(subtree)
+                tree1.contents[i].replace_with(copy.copy(subtree))
 
             extract_unique(tree1)
             return tree1
@@ -118,7 +118,7 @@ def partial_alignment(tree1, tree2):
 
                         match = True
 
-                    elif elem.has_attr('id') and elem2.has_attr('id') and el['id'] == elem2['id']:
+                    elif elem.has_attr('id') and elem2.has_attr('id') and elem['id'] == elem2['id']:
 
                         new_elem = partial_alignment(elem, elem2)
                         new_tree.contents.append(copy.copy(new_elem))
@@ -173,7 +173,9 @@ def partial_alignment(tree1, tree2):
 
     return tree1
 
-def extract_unique(tree : BeautifulSoup):
+def extract_unique(t : BeautifulSoup):
+
+    """
     tree.contents = list(filter(lambda x: x != " ", tree.contents))
 
     i = 0
@@ -197,6 +199,32 @@ def extract_unique(tree : BeautifulSoup):
                 # tag as repeat
                 tree.contents[i]["r"] = "t"
                 tree.contents[j].extract()
+            else:
+                j += 1
+        i += 1
+    """
+
+    t.contents = list(filter(lambda x: x != " ", t.contents))
+
+    i = 0
+
+    while i < len(t.contents):
+        j = i + 1
+        while j < len(t.contents):
+
+            if isinstance(t.contents[i], bs4.NavigableString) or isinstance(t.contents[j], bs4.NavigableString):
+                j += 1
+            elif Levenshtein.distance(str(clear_nav(copy.copy(t.contents[i]))),
+                                      str(clear_nav(copy.copy(t.contents[j])))) / max(len(str(t.contents[i])),
+                                                                                             len(str(t.contents[
+                                                                                                         j]))) < 0.2 and \
+                    tree_height(t.contents[j], 0) == tree_height(t.contents[i], 0):
+
+                _temp = copy.copy(t.contents[i])
+                t.contents[i].replace_with(copy.copy(partial_alignment(t.contents[i], t.contents[j])))
+                # add repeat tag
+                t.contents[i]["r"] = "t"
+                t.contents[j].extract()
             else:
                 j += 1
         i += 1
@@ -239,14 +267,14 @@ def strip_whitespace(html_string):
 
 def clear_nav(tree : BeautifulSoup):
 
+    count = 0
+    l = len(tree.contents)
+
     if not isinstance(tree, bs4.NavigableString) and 'href' in tree.attrs:
         tree.attrs["href"] = ""
     if not isinstance(tree, bs4.NavigableString) and 'title' in tree.attrs:
         tree.attrs["title"] = ""
 
-
-    count = 0
-    l = len(tree.contents)
 
     while(count < l):
 
@@ -266,26 +294,64 @@ def clear_tags(tree : BeautifulSoup) -> BeautifulSoup:
     new_tree = tree.find("body")
 
     # remove script tags
-    for match in new_tree.find('script'):
+    for match in new_tree('script'):
         match.decompose()
 
     # remove style tags
-    for match in new_tree.find('style'):
+    for match in new_tree('style'):
         match.decompose()
 
     # remove noscript tags
-    for match in new_tree.find('noscript'):
+    for match in new_tree('noscript'):
         match.decompose()
 
     # remove iframe tags
-    for match in new_tree.find('iframe'):
+    for match in new_tree('iframe'):
         match.decompose()
 
     # remove comments
     for match in new_tree.findAll(text=lambda text: isinstance(text, bs4.Comment)):
-        match.decompose()
+        match.extract()
 
     return new_tree
+
+def remove_trash(abs_tree : BeautifulSoup):
+
+    if isinstance(abs_tree, bs4.NavigableString):
+        if str(abs_tree) in ["#PGDATA", "#RANDOM"]:
+            return True
+        else:
+            return False
+
+    if len(abs_tree.contents) == 0:
+        return False
+
+    i = 0
+    l = len(abs_tree.contents)
+    important = False
+
+    if 'href' in abs_tree.attrs:
+        abs_tree.attrs['href'] = "*"
+    if 'title' in abs_tree.attrs:
+        abs_tree.attrs['title'] = "*"
+    if 'data-gps-track' in abs_tree.attrs:
+        abs_tree.attrs['data-gps-track'] = "*"
+
+    while i < l:
+
+        child_el = abs_tree.contents[i]
+
+        if not remove_trash(child_el):
+            try:
+                abs_tree.contents[i] = bs4.NavigableString("#RANDOM")
+            except:
+                pass
+        else:
+            important = True
+
+        i += 1
+
+    return important
 
 def extract(raw_p1, raw_p2):
 
@@ -303,7 +369,19 @@ def extract(raw_p1, raw_p2):
     # perform partial alignment
     abs_tree = partial_alignment(page_trees[0], page_trees[1])
 
+    remove_trash(abs_tree)
 
+    items = abs_tree.findAll(lambda elem: elem.has_attr('r'))
 
+    for item in items:
+        item.wrap(BeautifulSoup("", "html.parser").new_tag("repeat"))
 
-    pass
+    abstract_str = re.sub(r"(#RANDOM)+", r"#RANDOM", str(abs_tree))
+    abstract_str = re.sub(r"(#PGDATA)+", r"#PGDATA", str(abstract_str))
+    abstract_str = re.sub(r'r="t"', r'', str(abstract_str))
+    abstract_str = re.sub(r'(#PGDATA#RANDOM)+', r'#PGDATA', str(abstract_str))
+    abstract_str = re.sub(r'(#RANDOM#PGDATA)+', r'#PGDATA', str(abstract_str))
+    abstract_str = re.sub(r'#PGDATA', r'#P', str(abstract_str))
+    abstract_str = re.sub(r'#RANDOM', r'#R', str(abstract_str))
+
+    return str(abstract_str)
