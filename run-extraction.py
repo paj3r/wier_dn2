@@ -5,6 +5,7 @@ import codecs
 import json
 import RegexFile as r
 import xPathFile as x
+import RoadRunner as rr
 
 
 
@@ -12,11 +13,11 @@ method = sys.argv[1]
 #print(method)
 folders = os.listdir("webpages")
 bolha = codecs.open("./webpages/bolha.com/aparati.html", "r", "utf-8")
+bolha2 = codecs.open("webpages/bolha.com/avdio.html", "r", "utf-8")
 jewelry1 = codecs.open("webpages/overstock.com/jewelry01.html", "r", "ISO-8859-1")
 jewelry2 = codecs.open("webpages/overstock.com/jewelry02.html", "r", "ISO-8859-1")
 audi = codecs.open("webpages/rtvslo.si/Audi A6 50 TDI quattro_ nemir v premijskem razredu - RTVSLO.si.html", "r", "utf-8")
 volvo = codecs.open("webpages/rtvslo.si/Volvo XC 40 D4 AWD momentum_ suvereno med najboljše v razredu - RTVSLO.si.html", "r", "utf-8")
-bolha2 = codecs.open("webpages/bolha.com/avdio.html", "r", "utf-8")
 
 #print(pr.group(0))
 if method == "A":
@@ -33,6 +34,12 @@ elif method == "B":
     ove2 = x.xpath("overstock", jewelry2.read())
     rtv = x.xpath("rtv", audi.read())
     rtv2 = x.xpath("rtv", volvo.read())
+elif method == "C":
+    ove = rr.extract(jewelry1.read(), jewelry2.read())
+    rtv = rr.extract(audi.read(),volvo.read())
+    bol = rr.extract(bolha.read(),bolha2.read())
+
+
 ou = {
     "bolha.com": {
         "0": bol,
