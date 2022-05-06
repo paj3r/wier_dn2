@@ -184,8 +184,6 @@ def tree_alignment(tree1, tree2):
 
 def extract_unique(tree : BeautifulSoup):
 
-    #tree.contents = list(filter(lambda x: x != " ", tree.contents))
-
     tmp = []
 
     for item in tree.contents:
