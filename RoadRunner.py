@@ -16,8 +16,20 @@ def tree_alignment(tree1, tree2):
 
     # check parents
     if tree1.name == tree2.name:
-        tree1.contents = list(filter(lambda item: item != " ", tree1.contents))
-        tree2.contents = list(filter(lambda item: item != " ", tree2.contents))
+
+        tmp = []
+        for item in tree1.contents:
+            if item != " ":
+                tmp.append(item)
+
+        tree1.contents = tmp
+
+        tmp = []
+        for item in tree2.contents:
+            if item != " ":
+                tmp.append(item)
+
+        tree2.contents = tmp
 
         # check children
 
@@ -51,9 +63,6 @@ def tree_alignment(tree1, tree2):
         else:
             extract_unique(tree1)
             extract_unique(tree2)
-
-            short_tree = ""
-            long_tree = ""
 
             if(len(list(tree1.children)) <= len(list(tree2.children))):
                 short_tree = copy.copy(tree1)
@@ -175,7 +184,15 @@ def tree_alignment(tree1, tree2):
 
 def extract_unique(tree : BeautifulSoup):
 
-    tree.contents = list(filter(lambda x: x != " ", tree.contents))
+    #tree.contents = list(filter(lambda x: x != " ", tree.contents))
+
+    tmp = []
+
+    for item in tree.contents:
+        if item != " ":
+            tmp.append(item)
+
+    tree.contents = tmp
 
     i = 0
 
