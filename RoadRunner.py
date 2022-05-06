@@ -136,7 +136,7 @@ def tree_alignment(tree1, tree2):
 
                         match = True
 
-                    elif elem.name == elem2.name and Levenshtein.distance(str(clear_nav(copy.copy(elem))), str(clear_nav(copy.copy(elem2)))) < int(0.2 * max(len(str(elem)), len(str(elem2)))) and tree_height(elem, 0) == tree_height(elem2, 0):
+                    elif elem.name == elem2.name and calc_elements(elem, elem2):
 
                         new_el = tree_alignment(elem, elem2)
                         new_tree.contents.append(copy.copy(new_el))
@@ -174,7 +174,7 @@ def tree_alignment(tree1, tree2):
     return tree1
 
 def extract_unique(tree : BeautifulSoup):
-    """
+
     tree.contents = list(filter(lambda x: x != " ", tree.contents))
 
     i = 0
@@ -182,42 +182,10 @@ def extract_unique(tree : BeautifulSoup):
     while i < len(tree.contents):
         j = i + 1
         while j < len(tree.contents):
-                    # str(clear_nav(copy.copy(tree.contents[i])))
-            no_nav1 = str(clear_nav(copy.copy(tree.contents[i])))
-            no_nav2 = str(clear_nav(copy.copy(tree.contents[j])))
-            max_len = max(len(str(tree.contents[i])), len(str(tree.contents[j])))
-            same = tree_height(tree.contents[i], 0) == tree_height(tree.contents[j], 0)
-
-
-            if isinstance(tree.contents[i], bs4.NavigableString) or isinstance(tree.contents[i], bs4.NavigableString):
-                j += 1
-                #
-            elif Levenshtein.distance(no_nav1, no_nav2) / max_len < 0.2 and same:
-
-                _temp = copy.copy(tree.contents[i])
-                tree.contents[i] = copy.copy(tree_alignment(tree.contents[i], tree.contents[j]))
-
-                # tag as repeat
-                tree.contents[i]["r"] = "t"
-                tree.contents[j].extract()
-            else:
-                j += 1
-        i += 1
-
-    """
-    tree.contents = list(filter(lambda x: x != " ", tree.contents))
-
-    i = 0
-
-    while i < len(tree.contents):
-        j = i + 1
-        while j < len(tree.contents):
-
-
 
             if isinstance(tree.contents[i], bs4.NavigableString) or isinstance(tree.contents[j], bs4.NavigableString):
                 j += 1
-            elif Levenshtein.distance(str(clear_nav(copy.copy(tree.contents[i]))), str(clear_nav(copy.copy(tree.contents[j])))) / max(len(str(tree.contents[i])), len(str(tree.contents[j]))) < 0.2 and tree_height(tree.contents[j], 0) == tree_height(tree.contents[i], 0):
+            elif calculate_dist(tree, i, j):
 
                 _temp = copy.copy(tree.contents[i])
                 tree.contents[i].replace_with(copy.copy(tree_alignment(tree.contents[i], tree.contents[j])))
@@ -228,12 +196,27 @@ def extract_unique(tree : BeautifulSoup):
                 j += 1
         i += 1
 
+def calc_elements(elem : BeautifulSoup, elem2: BeautifulSoup):
+
+    elements1 = str(clear_nav(copy.copy(elem)))
+    elements2 = str(clear_nav(copy.copy(elem2)))
+    max_len = max(len(str(elem)), len(str(elem2)))
+
+    Levenshtein.distance(elements1, elements2) < int(0.2 * max_len) and tree_height(elem, 0) == tree_height(elem2, 0)
+
+def calculate_dist(tree : BeautifulSoup, i, j) -> bool:
+
+    no_nav1 = str(clear_nav(copy.copy(tree.contents[i])))
+    no_nav2 = str(clear_nav(copy.copy(tree.contents[j])))
+    max_len = max(len(str(tree.contents[i])), len(str(tree.contents[j])))
+    tree_comp = tree_height(tree.contents[i], 0) == tree_height(tree.contents[j], 0)
+
+    return Levenshtein.distance(no_nav1, no_nav2) / max_len < 0.2 and tree_comp
+
 
 def similar(param, param1):
 
     for x in param:
-        if x in ['mobile-show-only']:
-            continue
         if x in param1:
             return True
     return False

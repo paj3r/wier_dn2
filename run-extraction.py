@@ -19,13 +19,34 @@ jewelry2 = codecs.open("webpages/overstock.com/jewelry02.html", "r", "ISO-8859-1
 audi = codecs.open("webpages/rtvslo.si/Audi A6 50 TDI quattro_ nemir v premijskem razredu - RTVSLO.si.html", "r", "utf-8")
 volvo = codecs.open("webpages/rtvslo.si/Volvo XC 40 D4 AWD momentum_ suvereno med najboljše v razredu - RTVSLO.si.html", "r", "utf-8")
 
+filenames = ["bolha1", "bolha2", "overstock1", "overstock2", "rtvslo1", "rtvslo2"]
+
 if os.path.isdir("results"):
     print("Results dir already exists")
-    pass
+
+    if os.path.isdir("results\\roadrunner"):
+        pass
+    else:
+        os.mkdir("results\\roadrunner")
+
+    if os.path.isdir("results\\regex"):
+        pass
+    else:
+        os.mkdir("results\\regex")
+
+    if os.path.isdir("results\\xpath"):
+        pass
+    else:
+        os.mkdir("results\\xpath")
+
+
 else:
     os.mkdir("results")
+    os.mkdir("results\\roadrunner")
+    os.mkdir("results\\regex")
+    os.mkdir("results\\xpath")
 
-def write_json(method):
+def write_json(method, data):
     ou = {
         "bolha.com": {
             "0": bol,
@@ -41,10 +62,18 @@ def write_json(method):
         }
     }
 
+
+
     if method == "A":
-        pass
+        for i in range(len(data)):
+            with open("results\\regex\\{}.json".format(filenames[i]), "w") as file:
+                file.write(data[i])
+
+
     elif method == "B":
-        pass
+        for i in range(len(data)):
+            with open("results\\xpath\\{}.json".format(filenames[i]), "w") as file:
+                file.write(data[i])
 
 def make_txt(results):
 
@@ -71,7 +100,8 @@ if method == "A":
     ove2 = r.regex("overstock", jewelry2.read())
     rtv = r.regex("rtv", audi.read())
     rtv2 = r.regex("rtv", volvo.read())
-    write_json()
+    write_json("A", [bol, bol2, ove, ove2, rtv, rtv2])
+
 elif method == "B":
     bol = x.xpath("bolha", bolha.read())
     bol2 = x.xpath("bolha", bolha2.read())
@@ -79,7 +109,8 @@ elif method == "B":
     ove2 = x.xpath("overstock", jewelry2.read())
     rtv = x.xpath("rtv", audi.read())
     rtv2 = x.xpath("rtv", volvo.read())
-    write_json()
+    write_json("B", [bol, bol2, ove, ove2, rtv, rtv2])
+
 elif method == "C":
     ove = rr.extract(jewelry1.read(), jewelry2.read())
     rtv = rr.extract(audi.read(),volvo.read())
