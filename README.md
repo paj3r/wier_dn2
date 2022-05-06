@@ -12,4 +12,5 @@ The method parameter sets the method of data extraction:
 ## Repo organization
 
 __results__ - contains extracted data, each method has its own folder
+
 __webpages__ - contains pages for extraction
