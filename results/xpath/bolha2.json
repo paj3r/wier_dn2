@@ -1,0 +1,266 @@
+{
+    "Search_topic": "Avdio",
+    "Subtopics": {
+        "Avdio ostalo": {
+            "hrefs": "https://www.bolha.com/avdio-ostalo",
+            "count": "942"
+        },
+        "Avdio procesorji": {
+            "hrefs": "https://www.bolha.com/avdio-procesorji",
+            "count": "48"
+        },
+        "Digitalni snemalniki": {
+            "hrefs": "https://www.bolha.com/digitalni-snemalniki",
+            "count": "27"
+        },
+        "Diktafoni": {
+            "hrefs": "https://www.bolha.com/diktafoni",
+            "count": "42"
+        },
+        "DJ oprema": {
+            "hrefs": "https://www.bolha.com/dj-oprema",
+            "count": "37"
+        },
+        "Glasbeni predvajalniki": {
+            "hrefs": "https://www.bolha.com/glasbeni-predvajalniki",
+            "count": "5"
+        },
+        "HI-FI komponente": {
+            "hrefs": "https://www.bolha.com/hi-fi-komponente",
+            "count": "160"
+        },
+        "Mikrofoni": {
+            "hrefs": "https://www.bolha.com/mikrofoni",
+            "count": "735"
+        },
+        "Prenosni predvajalniki": {
+            "hrefs": "https://www.bolha.com/prenosni-predvajalniki",
+            "count": "165"
+        },
+        "Slu\u0161alke": {
+            "hrefs": "https://www.bolha.com/slusalke-avdio-video",
+            "count": "190"
+        },
+        "Zvo\u010dniki": {
+            "hrefs": "https://www.bolha.com/zvocniki",
+            "count": "245"
+        }
+    },
+    "Ads": {
+        "Total_count": [
+            "5363"
+        ],
+        "Ads": {
+            "Stenski Radio CD Bluetooth Panasonic SC-HC295 Bel": {
+                "Location": "Ljubljana Moste Polje, Nove Jar\u0161e",
+                "Posted": "02.05.2022.",
+                "Image_href": "./Avdio_files/mozart-kompletna-zbirka-vseh-del-slika-17164915.jpg",
+                "Price": "55",
+                "Href": "https://www.bolha.com/zvocne-postaje-glasbeni-predvajalniki/stenski-radio-cd-bluetooth-panasonic-sc-hc295-bel-oglas-9193027"
+            },
+            "Apple Airpods Pro": {
+                "Location": "Ljutomer, Ljutomer",
+                "Posted": "01.05.2022.",
+                "Image_href": "./Avdio_files/sony-mini-glasbeni-stolp-slika-31915412.jpg",
+                "Price": "130",
+                "Href": "https://www.bolha.com/slusalke-avdio-video/apple-airpods-pro-oglas-9366400"
+            },
+            "BOSE ACOUSTIMASS 10": {
+                "Location": "Kamnik, Kamnik",
+                "Posted": "27.04.2022.",
+                "Image_href": "./Avdio_files/koncna-stopnja-behringer-ep-4000-slika-23136354.jpg",
+                "Price": "310",
+                "Href": "https://www.bolha.com/komplet-zvocnikov-avdio-video/komplet-zvocnikov-bose-acoustimass-10-oglas-9021190"
+            },
+            "PRODAM ZVO\u010cNIK IBIZA PORT12UHF": {
+                "Location": "Novo mesto, Oto\u010dec",
+                "Posted": "27.04.2022.",
+                "Image_href": "./Avdio_files/stikalni-usmernik-ojacevalec-2-x-35v-2x15v-skupaj-500w-slika-23103924.jpg",
+                "Price": "190",
+                "Href": "https://www.bolha.com/aktivni-sistemi-avdio-video/prodam-zvocnik-ibiza-port12uhv-oglas-8794810"
+            },
+            "Apple AirPods Pro": {
+                "Location": "Velenje, Velenje",
+                "Posted": "26.04.2022.",
+                "Image_href": "./Avdio_files/ojacevalec-stikalna-ploscica-100w-slika-23103795.jpg",
+                "Price": "140",
+                "Href": "https://www.bolha.com/slusalke-avdio-video/apple-airpods-pro-oglas-9341423"
+            },
+            "MOZART kompletna zbirka vseh del": {
+                "Location": "Ljubljana Moste Polje, Moste",
+                "Posted": "03.05.2022.",
+                "Image_href": "./Avdio_files/ojacevalec-2-x-400w-komplet-tiskano-vezje-slika-23103818.jpg",
+                "Price": "100",
+                "Href": "https://www.bolha.com/avdio-ostalo/mozart-kompletna-zbirka-vseh-del-oglas-3967862"
+            },
+            "SONY mini glasbeni stolp": {
+                "Location": "Kranjska Gora, Kranjska Gora",
+                "Posted": "03.05.2022.",
+                "Image_href": "./Avdio_files/kupim-jbl-party-box-go-100-110-200-300-310-1000-slika-29065967.jpg",
+                "Price": "35",
+                "Href": "https://www.bolha.com/av-sprejemniki-hi-fi-komponente/sony-mini-glasbeni-stolp-oglas-8545493"
+            },
+            "Kon\u010dna stopnja Behringer EP 4000": {
+                "Location": "Maj\u0161perk, Le\u0161je",
+                "Posted": "03.05.2022.",
+                "Image_href": "./Avdio_files/skype-slusalka-z-mikrofonom-slika-10423.jpg",
+                "Price": "350",
+                "Href": "https://www.bolha.com/avdio-ostalo/koncna-stopnja-behringer-ep-4000-oglas-7017648"
+            },
+            "Stikalni usmernik za oja\u010devalec 2 x 35V + 2x15V skupaj 500W": {
+                "Location": "Maj\u0161perk, Le\u0161je",
+                "Posted": "03.05.2022.",
+                "Image_href": "./Avdio_files/sprejemnik-yamaha-rx-v440-6.1-slika-16645454.jpg",
+                "Price": "90",
+                "Href": "https://www.bolha.com/avdio-ostalo/stikalni-usmernik-ojacevalec-2-x-35v-2x15v-skupaj-500w-oglas-7004532"
+            },
+            "Oja\u010devalec stikalna plo\u0161\u010dica 100W": {
+                "Location": "Maj\u0161perk, Le\u0161je",
+                "Posted": "03.05.2022.",
+                "Image_href": "./Avdio_files/stojalo-zvocnike-slika-21359082.jpg",
+                "Price": "40",
+                "Href": "https://www.bolha.com/avdio-ostalo/ojacevalec-stikalna-ploscica-100w-oglas-7004494"
+            },
+            "Oja\u010devalec 2 x 400W komplet tiskano vezje": {
+                "Location": "Maj\u0161perk, Le\u0161je",
+                "Posted": "03.05.2022.",
+                "Image_href": "./Avdio_files/mp3-mp4-fm-predvajalnik-512mb-slika-2043240.jpg",
+                "Price": "110",
+                "Href": "https://www.bolha.com/avdio-ostalo/ojacevalec-2-x-400w-komplet-tiskano-vezje-oglas-7004506"
+            },
+            "KUPIM JBL Party Box Go | 100 | 110 | 200 | 300 | 310 | 1000": {
+                "Location": "Ljubljana Center, Center",
+                "Posted": "03.05.2022.",
+                "Image_href": "./Avdio_files/receiver-technics-sa400-slika-34750716.jpg",
+                "Price": "Cena po dogovoru",
+                "Href": "https://www.bolha.com/aktivni-sistemi-avdio-video/kupim-jbl-party-box-go-100-110-200-300-310-1000-oglas-7897581"
+            },
+            "SKYPE slu\u0161alka z mikrofonom": {
+                "Location": "Menge\u0161, Menge\u0161",
+                "Posted": "03.05.2022.",
+                "Image_href": "./Avdio_files/prenosni-zvocnik-sony-extra-bsss-slika-33237300.jpg",
+                "Price": "Cena po dogovoru",
+                "Href": "https://www.bolha.com/slusalke-avdio-video/skype-slusalka-z-mikrofonom-oglas-172540"
+            },
+            "Sprejemnik Yamaha RX-V440 6.1": {
+                "Location": "Menge\u0161, Menge\u0161",
+                "Posted": "03.05.2022.",
+                "Image_href": "./Avdio_files/yamaha-cdx-493-slika-34312729.jpg",
+                "Price": "150",
+                "Href": "https://www.bolha.com/av-sprejemniki-hi-fi-komponente/sprejemnik-yamaha-rx-v440-6.1-oglas-121318"
+            },
+            "Stojalo za  zvo\u010dnike": {
+                "Location": "Menge\u0161, Menge\u0161",
+                "Posted": "03.05.2022.",
+                "Image_href": "./Avdio_files/zvocnik-lqp-12-slika-28604945.jpg",
+                "Price": "30",
+                "Href": "https://www.bolha.com/avdio-ostalo/stojalo-zvocnike-oglas-6044348"
+            },
+            "MP3/MP4/FM predvajalnik 512MB": {
+                "Location": "Menge\u0161, Menge\u0161",
+                "Posted": "03.05.2022.",
+                "Image_href": "./Avdio_files/brezzicne-bluetooth-slusalke-slika-30249819.jpg",
+                "Price": "Cena po dogovoru",
+                "Href": "https://www.bolha.com/ostali-mp3-mp4-predvajalniki/mp3-mp4-fm-predvajalnik-512mb-oglas-1435909"
+            },
+            "Receiver TECHNICS SA400": {
+                "Location": "Ljubljana Be\u017eigrad, Zupan\u010di\u010deva jama",
+                "Posted": "03.05.2022.",
+                "Image_href": "./Avdio_files/aiwa-jax-e3-hi-fi-glasbeni-stolp-slika-34750437.jpg",
+                "Price": "230",
+                "Href": "https://www.bolha.com/ojacevalci-s-tunerji-hi-fi-komponente/receiver-technics-sa400-oglas-9379036"
+            },
+            "Prenosni zvo\u010dnik SONY Extra bsss": {
+                "Location": "Ilirska Bistrica, Podgrad",
+                "Posted": "03.05.2022.",
+                "Image_href": "./Avdio_files/plosca-lp-najvecji-uspehi-avsenikov-kot-podpisi-slika-31721091.jpg",
+                "Price": "80",
+                "Href": "https://www.bolha.com/sony-mp3-mp4-predvajalniki/prenosni-zvocnik-sony-extra-bsss-oglas-8946868"
+            },
+            "yamaha cdx-493": {
+                "Location": "Ljubljana Moste Polje, \u0160tepanja vas",
+                "Posted": "03.05.2022.",
+                "Image_href": "./Avdio_files/magnetofon-4307-philips-slika-30522045.jpg",
+                "Price": "70",
+                "Href": "https://www.bolha.com/cd-predvajalniki-hi-fi-komponente/yamaha-cdx-493-oglas-9261434"
+            },
+            "Zvo\u010dnik LQP-PA 12": {
+                "Location": "Ravne na Koro\u0161kem, Ravne na Koro\u0161kem",
+                "Posted": "03.05.2022.",
+                "Image_href": "./Avdio_files/zvocnik-odlicno-ohranjen-kot-nov-feste-prodam-menjava-mozna-slika-28073297.jpg",
+                "Price": "99",
+                "Href": "https://www.bolha.com/pasivni-sistemi-avdio-video/zvocnik-lqp-12-oglas-7766610"
+            },
+            "Brez\u017ei\u010dne Bluetooth slu\u0161alke": {
+                "Location": "Ljubljana \u0160i\u0161ka, Spodnja \u0160i\u0161ka",
+                "Posted": "03.05.2022.",
+                "Image_href": "./Avdio_files/walkman-kasetofon-kasetar-kasetnik-slika-34750278.jpg",
+                "Price": "9",
+                "Href": "https://www.bolha.com/slusalke-avdio-video/brezzicne-bluetooth-slusalke-oglas-8195237"
+            },
+            "AIWA JAX-E3 HI-FI Glasbeni stolp": {
+                "Location": "Kranj, Kranj",
+                "Posted": "03.05.2022.",
+                "Image_href": "./Avdio_files/technics-sc-ch510-slika-34750196.jpg",
+                "Price": "50",
+                "Href": "https://www.bolha.com/glasbeni-stolpi-glasbeni-predvajalniki/aiwa-jax-e3-hi-fi-glasbeni-stolp-oglas-9378951"
+            },
+            "Plo\u0161\u010da LP NAJVE\u010cJI USPEHI AVSENIKOV  S PODPISI KUPIM": {
+                "Location": "Ljubljana Center, Center",
+                "Posted": "03.05.2022.",
+                "Image_href": "./Avdio_files/nizkotonski-bas-zvocnik-210w-spa3040-slika-15196020.jpg",
+                "Price": "Cena po dogovoru",
+                "Href": "https://www.bolha.com/avdio-ostalo/plosca-lp-najvecji-uspehi-avsenikov-kot-podpisi-oglas-8487717"
+            },
+            "Magnetofon 4307 PHILIPS": {
+                "Location": "Ljubljana Center, Center",
+                "Posted": "03.05.2022.",
+                "Image_href": "./Avdio_files/jamo-d265-z-novim-bas-zvocnikom-slika-4540699.jpg",
+                "Price": "59",
+                "Href": "https://www.bolha.com/avdio-ostalo/magnetofon-4307-philips-oglas-8274453"
+            },
+            "Zvo\u010dnik odli\u010dno ohranjen, kot nov za FE\u0160TE prodam-MENJAVA MO\u017dNA": {
+                "Location": "Ljubljana Center, Center",
+                "Posted": "03.05.2022.",
+                "Image_href": "./Avdio_files/technic-cassette-deck-rs-d250-old-school-slika-1951356.jpg",
+                "Price": "Cena po dogovoru",
+                "Href": "https://www.bolha.com/aktivni-sistemi-avdio-video/zvocnik-odlicno-ohranjen-kot-nov-feste-prodam-menjava-mozna-oglas-7617983"
+            },
+            "Walkman kasetofon kasetar kasetnik": {
+                "Location": "Medvode, Medvode",
+                "Posted": "03.05.2022.",
+                "Image_href": "./Avdio_files/xplore-zvocnik-slika-34016931.jpg",
+                "Price": "25",
+                "Href": "https://www.bolha.com/walkman/walkman-kasetofon-kasetar-kasetnik-oglas-9378912"
+            },
+            "Technics SC-CH510": {
+                "Location": "Ljubljana Moste Polje, Moste",
+                "Posted": "03.05.2022.",
+                "Image_href": "No href",
+                "Price": "80",
+                "Href": "https://www.bolha.com/glasbeni-stolpi-glasbeni-predvajalniki/technics-sc-ch510-oglas-9378889"
+            },
+            "NIZKOTONSKI BAS ZVO\u010cNIK 210W SPA3040 POWER OF QUALITY": {
+                "Location": "Velenje, Arna\u010de",
+                "Posted": "03.05.2022.",
+                "Image_href": "No href",
+                "Price": "49",
+                "Href": "https://www.bolha.com/nizkotonski-zvocniki-avdio-video/nizkotonski-bas-zvocnik-210w-spa3040-oglas-2688424"
+            },
+            "JAMO D265 Z NOVIM BAS ZVO\u010cNIKOM-Lahko tudi samo zvo\u010dnik fi 304mm": {
+                "Location": "Velenje, Arna\u010de",
+                "Posted": "03.05.2022.",
+                "Image_href": "No href",
+                "Price": "55",
+                "Href": "https://www.bolha.com/trosistemski-zvocniki-avdio-video/jamo-d265-z-novim-bas-zvocnikom-oglas-1271731"
+            },
+            "TECHNIC-CASSETTE DECK RS-D250-Old School!": {
+                "Location": "Velenje, Arna\u010de",
+                "Posted": "03.05.2022.",
+                "Image_href": "No href",
+                "Price": "55",
+                "Href": "https://www.bolha.com/kasetna-komponenta-hi-fi-komponente/technic-cassette-deck-rs-d250-old-school-oglas-759800"
+            }
+        }
+    }
+}
