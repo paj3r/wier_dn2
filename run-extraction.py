@@ -48,7 +48,18 @@ def write_json(method):
 
 def make_txt(results):
 
+    try:
+        with open("results\\roadrunner\\overstock.txt", "w") as file:
+            file.write(results[0])
 
+        with open("results\\roadrunner\\rtvslo.txt", "w") as file:
+            file.write(results[1])
+
+        with open("results\\roadrunner\\bolha.txt", "w") as file:
+            file.write(results[2])
+
+    except FileNotFoundError:
+        print("Results directory doesn't exist!")
 
     pass
 
