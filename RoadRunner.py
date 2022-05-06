@@ -353,8 +353,6 @@ def remove_trash(abs_tree : BeautifulSoup):
 
 def extract(raw_p1, raw_p2):
 
-
-    #preprocess_regex
     pages = [str(raw_p1), str(raw_p2)]
 
     stripped = [strip_whitespace(page) for page in pages]
@@ -364,7 +362,7 @@ def extract(raw_p1, raw_p2):
     # clear some tags and comments
     page_trees = [clear_tags(tree) for tree in page_trees]
 
-    # perform partial alignment
+    # perform tree alignment
     abs_tree = tree_alignment(page_trees[0], page_trees[1])
 
     remove_trash(abs_tree)
