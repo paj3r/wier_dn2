@@ -66,8 +66,8 @@ def write_json(method, data):
 
     if method == "A":
         for i in range(len(data)):
-            with open("results\\regex\\{}.json".format(filenames[i]), "w") as file:
-                file.write(data[i])
+            with open("results\\regex\\{}.json".format(filenames[i]), "w") as out:
+                    json.dump(data[i], out, indent=4)
 
 
     elif method == "B":

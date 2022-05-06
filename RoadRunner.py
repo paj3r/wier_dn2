@@ -10,9 +10,9 @@ def tree_alignment(tree1, tree2):
 
     if isinstance(tree1, bs4.NavigableString) or isinstance(tree2, bs4.NavigableString):
         if isinstance(tree1, bs4.NavigableString) and isinstance(tree2, bs4.NavigableString):
-            return bs4.NavigableString("#PGDATA")
+            return bs4.NavigableString("#PCDATA")
         else:
-            return bs4.NavigableString("#RANDOM")
+            return bs4.NavigableString("#RND")
 
     # check parents
     if tree1.name == tree2.name:
@@ -301,7 +301,7 @@ def clear_tags(tree : BeautifulSoup) -> BeautifulSoup:
 def remove_trash(abs_tree : BeautifulSoup):
 
     if isinstance(abs_tree, bs4.NavigableString):
-        if str(abs_tree) in ["#PGDATA", "#RANDOM"]:
+        if str(abs_tree) in ["#PCDATA", "#RND"]:
             return True
         else:
             return False
@@ -326,7 +326,7 @@ def remove_trash(abs_tree : BeautifulSoup):
 
         if not remove_trash(child_el):
             try:
-                abs_tree.contents[i] = bs4.NavigableString("#RANDOM")
+                abs_tree.contents[i] = bs4.NavigableString("#RND")
             except:
                 pass
         else:
@@ -359,12 +359,12 @@ def extract(raw_p1, raw_p2):
     for item in items:
         item.wrap(BeautifulSoup("", "html.parser").new_tag("repeat"))
 
-    abstract_str = re.sub(r"(#RANDOM)+", r"#RANDOM", str(abs_tree))
-    abstract_str = re.sub(r"(#PGDATA)+", r"#PGDATA", str(abs_tree))
+    abstract_str = re.sub(r"(#RND)+", r"#RND", str(abs_tree))
+    abstract_str = re.sub(r"(#PCDATA)+", r"#PCDATA", str(abs_tree))
     abstract_str = re.sub(r'r="t"', r'', str(abs_tree))
-    abstract_str = re.sub(r'(#PGDATA#RANDOM)+', r'#PGDATA', str(abs_tree))
-    abstract_str = re.sub(r'(#RANDOM#PGDATA)+', r'#PGDATA', str(abs_tree))
-    abstract_str = re.sub(r'#PGDATA', r'#P', str(abs_tree))
-    abstract_str = re.sub(r'#RANDOM', r'#R', str(abs_tree))
+    abstract_str = re.sub(r'(#PCDATA#RND)+', r'#PCDATA', str(abs_tree))
+    abstract_str = re.sub(r'(#RND#PCDATA)+', r'#PCDATA', str(abs_tree))
+    abstract_str = re.sub(r'#PCDATA', r'#P', str(abs_tree))
+    abstract_str = re.sub(r'#RND', r'#R', str(abs_tree))
 
     return str(abstract_str)
