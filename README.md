@@ -17,3 +17,11 @@ The method parameter sets the method of data extraction:
 __results__ - contains extracted data, each method has its own folder
 
 __webpages__ - contains pages for extraction
+
+__run-extraction.py__ - main script, initializes selected extraction script
+
+__RegexFile.py__ - regex extraction script
+
+__xPathFile.py__ - xpath extraction script
+
+__RoadRunner.py__ - roadrunner extraction script
