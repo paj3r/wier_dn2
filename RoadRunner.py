@@ -6,7 +6,7 @@ import bs4
 import Levenshtein
 from bs4 import BeautifulSoup
 
-def partial_alignment(tree1, tree2):
+def tree_alignment(tree1, tree2):
 
     if isinstance(tree1, bs4.NavigableString) or isinstance(tree2, bs4.NavigableString):
         if isinstance(tree1, bs4.NavigableString) and isinstance(tree2, bs4.NavigableString):
@@ -40,7 +40,7 @@ def partial_alignment(tree1, tree2):
                     continue
 
                 # otherwise, make new p. aligned tree
-                subtree = partial_alignment(tree1_sub, tree2_sub)
+                subtree = tree_alignment(tree1_sub, tree2_sub)
 
                 tree1.contents[i].replace_with(copy.copy(subtree))
 
@@ -84,7 +84,7 @@ def partial_alignment(tree1, tree2):
 
                     if isinstance(elem, bs4.NavigableString) or isinstance(elem2, bs4.NavigableString):
 
-                        new_elem = partial_alignment(elem, elem2)
+                        new_elem = tree_alignment(elem, elem2)
                         new_tree.contents.append(copy.copy(new_elem))
 
                         short_tree.contents[i].extract()
@@ -102,7 +102,7 @@ def partial_alignment(tree1, tree2):
 
                     elif elem.has_attr("class") and elem2.has_attr("class") and similar(elem['class'], elem2['class']):
 
-                        new_elem = partial_alignment(elem, elem2)
+                        new_elem = tree_alignment(elem, elem2)
                         new_tree.contents.append(copy.copy(new_elem))
 
                         short_tree.contents[i].extract()
@@ -120,7 +120,7 @@ def partial_alignment(tree1, tree2):
 
                     elif elem.has_attr('id') and elem2.has_attr('id') and elem['id'] == elem2['id']:
 
-                        new_elem = partial_alignment(elem, elem2)
+                        new_elem = tree_alignment(elem, elem2)
                         new_tree.contents.append(copy.copy(new_elem))
 
                         short_tree.contents[i].extract()
@@ -138,7 +138,7 @@ def partial_alignment(tree1, tree2):
 
                     elif elem.name == elem2.name and Levenshtein.distance(str(clear_nav(copy.copy(elem))), str(clear_nav(copy.copy(elem2)))) < int(0.2 * max(len(str(elem)), len(str(elem2)))) and tree_height(elem, 0) == tree_height(elem2, 0):
 
-                        new_el = partial_alignment(elem, elem2)
+                        new_el = tree_alignment(elem, elem2)
                         new_tree.contents.append(copy.copy(new_el))
 
                         short_tree.contents[i].extract()
@@ -173,7 +173,36 @@ def partial_alignment(tree1, tree2):
 
     return tree1
 
-def extract_unique(t : BeautifulSoup):
+def extract_unique(tree : BeautifulSoup):
+    """
+    tree.contents = list(filter(lambda x: x != " ", tree.contents))
+
+    i = 0
+
+    while i < len(tree.contents):
+        j = i + 1
+        while j < len(tree.contents):
+                    # str(clear_nav(copy.copy(tree.contents[i])))
+            no_nav1 = str(clear_nav(copy.copy(tree.contents[i])))
+            no_nav2 = str(clear_nav(copy.copy(tree.contents[j])))
+            max_len = max(len(str(tree.contents[i])), len(str(tree.contents[j])))
+            same = tree_height(tree.contents[i], 0) == tree_height(tree.contents[j], 0)
+
+
+            if isinstance(tree.contents[i], bs4.NavigableString) or isinstance(tree.contents[i], bs4.NavigableString):
+                j += 1
+                #
+            elif Levenshtein.distance(no_nav1, no_nav2) / max_len < 0.2 and same:
+
+                _temp = copy.copy(tree.contents[i])
+                tree.contents[i] = copy.copy(tree_alignment(tree.contents[i], tree.contents[j]))
+
+                # tag as repeat
+                tree.contents[i]["r"] = "t"
+                tree.contents[j].extract()
+            else:
+                j += 1
+        i += 1
 
     """
     tree.contents = list(filter(lambda x: x != " ", tree.contents))
@@ -184,50 +213,21 @@ def extract_unique(t : BeautifulSoup):
         j = i + 1
         while j < len(tree.contents):
 
-            no_nav1 = str(clear_nav(copy.copy(tree.contents[i])))
-            no_nav2 = str(clear_nav(copy.copy(tree.contents[j])))
-            max_len = max(len(str(tree.contents[i])), len(str(tree.contents[j])))
 
 
-            if isinstance(tree.contents[i], bs4.NavigableString) or isinstance(tree.contents[i], bs4.NavigableString):
+            if isinstance(tree.contents[i], bs4.NavigableString) or isinstance(tree.contents[j], bs4.NavigableString):
                 j += 1
-            elif Levenshtein.distance(no_nav1, no_nav2,) / max_len < 0.2 and tree_height(tree.contents[i], 0) == tree_height(tree.contents[j], 0):
+            elif Levenshtein.distance(str(clear_nav(copy.copy(tree.contents[i]))), str(clear_nav(copy.copy(tree.contents[j])))) / max(len(str(tree.contents[i])), len(str(tree.contents[j]))) < 0.2 and tree_height(tree.contents[j], 0) == tree_height(tree.contents[i], 0):
 
-                temp = copy.copy(tree.contents[i])
-                tree.contents[i] = copy.copy(partial_alignment(tree.contents[i], tree.contents[j]))
-
+                _temp = copy.copy(tree.contents[i])
+                tree.contents[i].replace_with(copy.copy(tree_alignment(tree.contents[i], tree.contents[j])))
                 # tag as repeat
                 tree.contents[i]["r"] = "t"
                 tree.contents[j].extract()
             else:
                 j += 1
         i += 1
-    """
 
-    t.contents = list(filter(lambda x: x != " ", t.contents))
-
-    i = 0
-
-    while i < len(t.contents):
-        j = i + 1
-        while j < len(t.contents):
-
-            if isinstance(t.contents[i], bs4.NavigableString) or isinstance(t.contents[j], bs4.NavigableString):
-                j += 1
-            elif Levenshtein.distance(str(clear_nav(copy.copy(t.contents[i]))),
-                                      str(clear_nav(copy.copy(t.contents[j])))) / max(len(str(t.contents[i])),
-                                                                                             len(str(t.contents[
-                                                                                                         j]))) < 0.2 and \
-                    tree_height(t.contents[j], 0) == tree_height(t.contents[i], 0):
-
-                _temp = copy.copy(t.contents[i])
-                t.contents[i].replace_with(copy.copy(partial_alignment(t.contents[i], t.contents[j])))
-                # add repeat tag
-                t.contents[i]["r"] = "t"
-                t.contents[j].extract()
-            else:
-                j += 1
-        i += 1
 
 def similar(param, param1):
 
@@ -367,7 +367,7 @@ def extract(raw_p1, raw_p2):
     page_trees = [clear_tags(tree) for tree in page_trees]
 
     # perform partial alignment
-    abs_tree = partial_alignment(page_trees[0], page_trees[1])
+    abs_tree = tree_alignment(page_trees[0], page_trees[1])
 
     remove_trash(abs_tree)
 
@@ -377,11 +377,11 @@ def extract(raw_p1, raw_p2):
         item.wrap(BeautifulSoup("", "html.parser").new_tag("repeat"))
 
     abstract_str = re.sub(r"(#RANDOM)+", r"#RANDOM", str(abs_tree))
-    abstract_str = re.sub(r"(#PGDATA)+", r"#PGDATA", str(abstract_str))
-    abstract_str = re.sub(r'r="t"', r'', str(abstract_str))
-    abstract_str = re.sub(r'(#PGDATA#RANDOM)+', r'#PGDATA', str(abstract_str))
-    abstract_str = re.sub(r'(#RANDOM#PGDATA)+', r'#PGDATA', str(abstract_str))
-    abstract_str = re.sub(r'#PGDATA', r'#P', str(abstract_str))
-    abstract_str = re.sub(r'#RANDOM', r'#R', str(abstract_str))
+    abstract_str = re.sub(r"(#PGDATA)+", r"#PGDATA", str(abs_tree))
+    abstract_str = re.sub(r'r="t"', r'', str(abs_tree))
+    abstract_str = re.sub(r'(#PGDATA#RANDOM)+', r'#PGDATA', str(abs_tree))
+    abstract_str = re.sub(r'(#RANDOM#PGDATA)+', r'#PGDATA', str(abs_tree))
+    abstract_str = re.sub(r'#PGDATA', r'#P', str(abs_tree))
+    abstract_str = re.sub(r'#RANDOM', r'#R', str(abs_tree))
 
     return str(abstract_str)
